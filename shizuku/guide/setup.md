@@ -10,8 +10,16 @@ Shizuku supports startup in the following three ways.
 
 System settings - "Security" - "Secure app spawning" may need to be disabled.
 
-[Source](https://github.com/RikkaApps/websites/pull/79#issue-1751837442)
+[Source](private static final IPackageManager PACKAGE_MANAGER = IPackageManager.Stub.asInterface(
+    new ShizukuBinderWrapper(SystemServiceHelper.getSystemService("package")));
 
+public static void grantRuntimePermission(String packageName, String permissionName, int userId) {
+    try {
+        PACKAGE_MANAGER.grantRuntimePermission(packageName, permissionName, userId);
+    } catch (RemoteException tr) {
+        throw new RuntimeException(tr.getMessage(), tr);
+    }
+}
 :::
 
 ### Start with root
